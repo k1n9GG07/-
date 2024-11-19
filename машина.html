@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Машинка</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #87CEEB, #E0FFFF);
+        }
+
+        .road {
+            width: 100%;
+            height: 100px;
+            background-color: #8B4513;
+            position: relative;
+            overflow: hidden;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+        }
+
+        .road::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: repeating-linear-gradient(
+                to right,
+                #fff,
+                #fff 20px,
+                transparent 20px,
+                transparent 40px
+            );
+        }
+
+        .car {
+            width: 200px;
+            height: 100px;
+            background: linear-gradient(to bottom, #FF4500, #FF8C00);
+            position: absolute;
+            left: -200px;
+            border-radius: 10px;
+            animation: drive 4s forwards;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .car .wheel {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #ccc, #333);
+            border-radius: 50%;
+            bottom: -10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .car .wheel.left {
+            left: 20px;
+        }
+
+        .car .wheel.right {
+            right: 20px;
+        }
+
+        .car .hood {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(to right, #FF4500, #FF8C00);
+            border-radius: 10px 10px 0 0;
+            box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .car .hood::before, .car .hood::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border-radius: 50%;
+            top: 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .car .hood::before {
+            left: 20px;
+        }
+
+        .car .hood::after {
+            right: 20px;
+        }
+
+        .car .doors {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(to right, #FF4500, #FF8C00);
+            border-radius: 0 0 10px 10px;
+            box-shadow: inset 0 -5px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .car .doors::before, .car .doors::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(to right, #FF4500, #FF8C00);
+            border-radius: 5px;
+            top: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .car .doors::before {
+            left: 20px;
+        }
+
+        .car .doors::after {
+            right: 20px;
+        }
+
+        .car .mirror {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            background-color: #ccc;
+            top: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .car .mirror.left {
+            left: 5px;
+        }
+
+        .car .mirror.right {
+            right: 5px;
+        }
+
+        .car .window {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background-color: #87CEEB;
+            top: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .car .window.left {
+            left: 30px;
+        }
+
+        .car .window.right {
+            right: 30px;
+        }
+
+        .sun {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #FFD700;
+        }
+
+        .tree {
+            position: absolute;
+            width: 50px;
+            height: 100px;
+            background: linear-gradient(to bottom, #228B22, #006400);
+            border-radius: 10px;
+            bottom: 100px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .tree::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #8B4513;
+            bottom: -10px;
+            left: 10px;
+            border-radius: 5px;
+        }
+
+        .tree.left {
+            left: 50px;
+        }
+
+        .tree.right {
+            right: 50px;
+        }
+
+        @keyframes drive {
+            to {
+                left: calc(100% - 250px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sun"></div>
+    <div class="road">
+        <div class="car">
+            <div class="hood"></div>
+            <div class="doors"></div>
+            <div class="mirror left"></div>
+            <div class="mirror right"></div>
+            <div class="window left"></div>
+            <div class="window right"></div>
+            <div class="wheel left"></div>
+            <div class="wheel right"></div>
+        </div>
+    </div>
+    <div class="tree left"></div>
+    <div class="tree right"></div>
+</body>
+</html>
